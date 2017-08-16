@@ -19,23 +19,40 @@ final class Card
     * Sets the value, color, suit, and face of a card.
     *
     * @param (int)    value between 1-13
-    * @param (String) black or red
-    * @param (String) spades, clubs, hearts, diamond
-    * @param (bool)   1 = face up , 0 = face down
+    * @param (String) 'black' or 'red'
+    * @param (String) 'spades', 'clubs', 'hearts', 'diamond'
+    * @param (bool)   true = face up , false = face down
     */
    public function __construct($value, $color, $suit, $face) {
-       $this->value = $value;
-       $this->color = $color;
-       $this->suit  = $suit;
-       $this->face  = $face;
+       if (($value > 0) && ($value < 14)) {
+           $this->value = $value;
+       } else {
+           echo "Error: Please select a value between 1 and 13\n";
+       }
+
+       if (($color === 'red') || ($color === 'black')) {
+           $this->color = $color;
+       } else {
+           echo "Error: Please select red or black\n";
+       }
+
+       if (($suit === 'spades') || ($suit === 'clubs') || ($suit === 'hearts') || ($suit === 'diamond')) {
+           $this->suit  = $suit;
+       } else {
+           echo "Error: Please select spades, clubs, hearts, diamond";
+       }
+
+       if (($face === false) || ($face === true)) {
+           $this->face  = $face;
+       } else {
+           echo "Error: Please select true or false";
+       }
    }
 
    /*
     * getValue
     *
     * Gets the value of the card.
-    *
-    * @param (void)
     *
     * @return (int) A value between 1 and 13
     */
@@ -48,8 +65,6 @@ final class Card
      *
      * Gets the color of the card.
      *
-     * @param (void)
-     *
      * @return (String) "red" || "black"
      */
    public function  getColor() {
@@ -60,8 +75,6 @@ final class Card
      * getSuit
      *
      * Gets the suit of the card.
-     *
-     * @param (void)
      *
      * @return (String) spades, clubs, hearts, diamond
      */
@@ -74,19 +87,24 @@ final class Card
       *
       * Gets the face of the card.
       *
-      * @param (void)
-      *
-      * @return (bool) 1 for open, 0 for set
+      * @return (bool) true for open, false for set
       */
    public function  getFace() {
        return $this->face;
    }
 
+    /*
+     * setFace
+     *
+     * Sets the face value.
+     *
+     * @param (bool) the current face value
+     */
    public function setFace($face) {
-       $this->face = $face;
+       if (($face >= 0) && ($face <= 1)) {
+           $this->face = $face;
+       } else {
+           echo "Error: Please select true or false\n";
+       }
    }
 }
-
-$card = new Card(10, 'red', "hearts", 1);
-$card->setFace(1);
-echo $card->getFace();
