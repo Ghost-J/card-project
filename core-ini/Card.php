@@ -81,7 +81,12 @@ final class Card
    public function  getFace() {
        return $this->face;
    }
+
+   public function setFace($face) {
+       $this->face = $face;
+   }
 }
 
 $card = new Card(10, 'red', "hearts", 1);
-echo $card->getValue();
+$card->setFace(1);
+echo $card->getFace();
